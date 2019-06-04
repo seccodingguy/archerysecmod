@@ -181,7 +181,7 @@ def proj_data(request):
     all_manual_scan = manual_scans_db.objects.filter(project_id=project_id). \
         aggregate(Sum('total_vul'))
     
-    all_nikto = nikto_vuln_db.objects.filter(project_id=project_id).count()
+    #all_nikto = nikto_vuln_db.objects.filter(project_id=project_id).count()
 
     
     for key, value in all_zap_scan.items():
@@ -297,13 +297,13 @@ def proj_data(request):
                int(all_findbugs) + \
                int(all_clair) + \
                int(all_bandit) + \
-               int(all_manual) + \
-               int(all_nikto)
+               int(all_manual) #+ \
+               #int(all_nikto)
 
     total_network = int(all_openvas) + int(all_nessus) + int(pentest_net)
 
     total_web = int(all_zap) + int(all_burp) + int(pentest_web) + int(all_arachni) + \
-                int(all_netsparker) + int(all_webinspect) + int(all_acunetix) + int(all_nikto)
+                int(all_netsparker) + int(all_webinspect) + int(all_acunetix) #+ int(all_nikto)
 
     total_compliance = int(all_inspec)
 
