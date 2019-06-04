@@ -945,8 +945,8 @@ def proj_data(request):
                    'all_dependency_scan': all_dependency_scan,
                    'all_findbugs_scan': all_findbugs_scan,
                    'all_clair_scan': all_clair_scan,
-                   'all_webinspect_scan': all_webinspect_scan,
-                   'all_nikto_scan': all_nikto,
+                   'all_webinspect_scan': all_webinspect_scan
+                   #'all_nikto_scan': all_nikto,
 
                    'all_compliance_failed': all_compliance_failed,
                    'all_compliance_passed': all_compliance_passed,
