@@ -33,8 +33,8 @@ from webscanners.models import zap_scans_db, \
     acunetix_scan_db, acunetix_scan_result_db
 from manual_scan.models import manual_scans_db, manual_scan_results_db
 
-from tools.models import nikto_scan_db, \
-    nmap_scan_db
+from tools.models import nikto_result_db, \
+    nikto_vuln_db
 
 from staticscanners.models import dependencycheck_scan_db, \
     bandit_scan_db, bandit_scan_results_db, \
@@ -181,7 +181,7 @@ def proj_data(request):
     all_manual_scan = manual_scans_db.objects.filter(project_id=project_id). \
         aggregate(Sum('total_vul'))
     
-    all_nikto_scan = nikto_scan_db.objects.filter(project_id=project_id). \
+    all_nikto_scan = nikto_vuln_db.objects.filter(project_id=project_id). \
         aggregrate(Sum('total_vul'))
 
     for key, value in all_nikto_scan.items():
@@ -321,7 +321,7 @@ def proj_data(request):
     all_burp_high = burp_scan_db.objects.filter(project_id=project_id). \
         aggregate(Sum('high_vul'))
     
-    all_nikto_high = nikto_scan_db.objects.filter(project_id=project_id). \
+    all_nikto_high = nikto_vuln_db.objects.filter(project_id=project_id). \
         aggregate(Sum('high_vul'))
 
     all_arachni_high = arachni_scan_db.objects.filter(project_id=project_id). \
