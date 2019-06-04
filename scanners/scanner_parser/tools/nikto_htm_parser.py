@@ -15,7 +15,7 @@
 # This file is part of ArcherySec Project.
 
 from bs4 import BeautifulSoup
-from tools.models import nikto_vuln_db
+from tools.models import nikto_vuln_db, nikto_result_db
 import uuid
 import hashlib
 
@@ -133,3 +133,12 @@ def nikto_html_parser(data, project_id, scan_id):
 
         )
         dump_data.save()
+        
+   nikto_all_vul = nikto_vuln_db.objects.filter(scan_id=scan_id) \
+        .values('vuln_id', 'vuln_status').distinct()
+
+   total_vulns = len(nikto_all_vul.filter(vuln_status="Open"))
+   
+   nikto_result_db.objects.filter(scan_scanid=scan_id) \
+            .update(total_vul=total_vul)
+
