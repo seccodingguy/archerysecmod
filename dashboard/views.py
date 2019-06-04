@@ -33,6 +33,9 @@ from webscanners.models import zap_scans_db, \
     acunetix_scan_db, acunetix_scan_result_db
 from manual_scan.models import manual_scans_db, manual_scan_results_db
 
+from tools.models import nikto_scan_db, \
+    nmap_scan_db
+
 from staticscanners.models import dependencycheck_scan_db, \
     bandit_scan_db, bandit_scan_results_db, \
     findbugs_scan_db, \
@@ -177,12 +180,22 @@ def proj_data(request):
 
     all_manual_scan = manual_scans_db.objects.filter(project_id=project_id). \
         aggregate(Sum('total_vul'))
+    
+    all_nikto_scan = nikto_scan_db.objects.filter(project_id=project_id). \
+        aggregrate(Sum('total_vul'))
 
+    for key, value in all_nikto_scan.items():
+        if value is None:
+            all_nikto = '0'
+        else:
+            all_nikto = value
+            
     for key, value in all_zap_scan.items():
         if value is None:
             all_zap = '0'
         else:
             all_zap = value
+            
     for key, value in all_burp_scan.items():
         if value is None:
             all_burp = '0'
@@ -290,12 +303,13 @@ def proj_data(request):
                int(all_findbugs) + \
                int(all_clair) + \
                int(all_bandit) + \
-               int(all_manual)
+               int(all_manual) + \
+               int(all_nikto)
 
     total_network = int(all_openvas) + int(all_nessus) + int(pentest_net)
 
     total_web = int(all_zap) + int(all_burp) + int(pentest_web) + int(all_arachni) + \
-                int(all_netsparker) + int(all_webinspect) + int(all_acunetix)
+                int(all_netsparker) + int(all_webinspect) + int(all_acunetix) + int(all_nikto)
 
     total_compliance = int(all_inspec)
 
@@ -303,7 +317,11 @@ def proj_data(request):
 
     all_zap_high = zap_scans_db.objects.filter(project_id=project_id). \
         aggregate(Sum('high_vul'))
+    
     all_burp_high = burp_scan_db.objects.filter(project_id=project_id). \
+        aggregate(Sum('high_vul'))
+    
+    all_nikto_high = nikto_scan_db.objects.filter(project_id=project_id). \
         aggregate(Sum('high_vul'))
 
     all_arachni_high = arachni_scan_db.objects.filter(project_id=project_id). \
@@ -347,6 +365,13 @@ def proj_data(request):
             zap_high = '0'
         else:
             zap_high = value
+            
+    for key, value in all_nikto_high.items():
+        if value is None:
+            nikto_high = '0'
+        else:
+            nikto_high = value
+            
     for key, value in all_burp_high.items():
         if value is None:
             burp_high = '0'
@@ -455,14 +480,16 @@ def proj_data(request):
                int(high_clair) + \
                int(high_bandit) + \
                int(high_nessus) + \
-               int(pentest_high)
+               int(pentest_high) + \
+               int(nikto_high)
 
     all_web_high = int(zap_high) + \
                    int(burp_high) + \
                    int(high_arachni) + \
                    int(high_netsparker) + \
                    int(high_acunetix) + \
-                   int(high_webinspect) + int(high_pentest_web)
+                   int(high_webinspect) + int(high_pentest_web) + \
+                   int(nikto_high)
 
     all_static_high = int(high_dependency) + \
                       int(high_findbugs) + \
