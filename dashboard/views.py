@@ -182,7 +182,7 @@ def proj_data(request):
         aggregate(Sum('total_vul'))
     
     all_nikto_scan = nikto_vuln_db.objects.filter(project_id=project_id). \
-        aggregrate(Sum('total_vul'))
+        aggregrate(Sum('vuln_id'))
 
     for key, value in all_nikto_scan.items():
         if value is None:
@@ -321,9 +321,6 @@ def proj_data(request):
     all_burp_high = burp_scan_db.objects.filter(project_id=project_id). \
         aggregate(Sum('high_vul'))
     
-    all_nikto_high = nikto_vuln_db.objects.filter(project_id=project_id). \
-        aggregate(Sum('high_vul'))
-
     all_arachni_high = arachni_scan_db.objects.filter(project_id=project_id). \
         aggregate(Sum('high_vul'))
 
@@ -480,8 +477,7 @@ def proj_data(request):
                int(high_clair) + \
                int(high_bandit) + \
                int(high_nessus) + \
-               int(pentest_high) + \
-               int(nikto_high)
+               int(pentest_high)
 
     all_web_high = int(zap_high) + \
                    int(burp_high) + \
@@ -963,6 +959,7 @@ def proj_data(request):
                    'all_findbugs_scan': all_findbugs_scan,
                    'all_clair_scan': all_clair_scan,
                    'all_webinspect_scan': all_webinspect_scan,
+                   'all_nikto_scan': all_nikto_scan,
 
                    'all_compliance_failed': all_compliance_failed,
                    'all_compliance_passed': all_compliance_passed,
