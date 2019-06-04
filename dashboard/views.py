@@ -183,12 +183,7 @@ def proj_data(request):
     
     all_nikto_scan = nikto_vuln_db.objects.filter(project_id=project_id).count()
 
-    for key, value in all_nikto_scan.items():
-        if value is None:
-            all_nikto = '0'
-        else:
-            all_nikto = value
-            
+    
     for key, value in all_zap_scan.items():
         if value is None:
             all_zap = '0'
