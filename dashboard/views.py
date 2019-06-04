@@ -181,8 +181,8 @@ def proj_data(request):
     all_manual_scan = manual_scans_db.objects.filter(project_id=project_id). \
         aggregate(Sum('total_vul'))
     
-    all_nikto_scan = nikto_vuln_db.objects.filter(project_id=project_id). \
-        aggregrate(Sum('vuln_id'))
+    all_nikto_scan = nikto_result_db.objects.filter(project_id=project_id). \
+        aggregrate(Sum('total_vuln'))
 
     for key, value in all_nikto_scan.items():
         if value is None:
