@@ -135,7 +135,7 @@ def nikto_html_parser(data, project_id, scan_id):
         dump_data.save()
         
    nikto_all_vul = nikto_vuln_db.objects.filter(scan_id=scan_id) \
-        .values('vuln_id', 'vuln_status').distinct()
+            .values('vuln_id', 'vuln_status').distinct()
 
    total_vulns = len(nikto_all_vul.filter(vuln_status="Open"))
    
