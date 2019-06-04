@@ -356,13 +356,7 @@ def proj_data(request):
             zap_high = '0'
         else:
             zap_high = value
-            
-    for key, value in all_nikto_high.items():
-        if value is None:
-            nikto_high = '0'
-        else:
-            nikto_high = value
-            
+           
     for key, value in all_burp_high.items():
         if value is None:
             burp_high = '0'
@@ -478,9 +472,8 @@ def proj_data(request):
                    int(high_arachni) + \
                    int(high_netsparker) + \
                    int(high_acunetix) + \
-                   int(high_webinspect) + int(high_pentest_web) + \
-                   int(nikto_high)
-
+                   int(high_webinspect) + int(high_pentest_web)
+    
     all_static_high = int(high_dependency) + \
                       int(high_findbugs) + \
                       int(high_bandit)
