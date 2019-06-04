@@ -34,6 +34,7 @@ class nikto_result_db(models.Model):
     scan_url = models.TextField(blank=True, null=True)
     nikto_scan_output = models.TextField(blank=True, null=True)
     date_time = models.TextField(null=True, blank=True)
+    total_vul = models.IntegerField(blank=True, null=True)
 
 
 class nikto_vuln_db(models.Model):
