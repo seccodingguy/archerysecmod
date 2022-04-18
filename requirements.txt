@@ -54,7 +54,7 @@ PyBurprestapi
 pycparser==2.18
 PyJWT==1.6.1
 pylint==1.9.3
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 Pyphen==0.9.4
 python-nmap==0.6.1
 python-owasp-zap-v2.4==0.0.13
