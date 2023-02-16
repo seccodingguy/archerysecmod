@@ -48,7 +48,7 @@ openvas_lib
 ordereddict==1.1
 pbr==4.0.3
 pdfrw==0.4
-Pillow==6.0.0
+Pillow==9.2.0
 psycopg2-binary==2.7.5
 PyBurprestapi
 pycparser==2.18
@@ -61,7 +61,7 @@ python-owasp-zap-v2.4==0.0.13
 python-taint==0.40
 python-whois==0.6.2
 pytz==2017.3
-reportlab==3.4.0
+reportlab==3.5.55
 requests==2.20.0
 requests-oauthlib==0.8.0
 requests-toolbelt==0.8.0
@@ -78,3 +78,4 @@ xhtml2pdf==0.2.3
 beautifulsoup4==4.7.1
 django-import-export==1.2.0
 django-s3-storage==0.12.4
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
